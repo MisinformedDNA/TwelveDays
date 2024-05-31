@@ -4,16 +4,7 @@ string strings = "@n'+,#'/*{}w+/w#cdnr/+,{}r/*de}+,/*{*+,/w{%+,/w#q#n+,/#{l+,/n{
 
 string translate = "!ek;dc i@bK'(q)-[w]*%n+r3#l,{}:\nuwloca-O;m .vpbks,fxntdCeghiry";
 
-string skip_n_strings(int n, string s)
-{
-    if (n == 0)
-        return s;
-
-    if (s[0] == '/')
-        return skip_n_strings(n + 1, s[1..]);
-    else
-        return skip_n_strings(n, s[1..]);
-}
+string skip_n_strings(int n, string s) => n == 0 ? s : s[0] == '/' ? skip_n_strings(n + 1, s[1..]) : skip_n_strings(n, s[1..]);
 
 void translate_and_put_char(char c, string trans)
 {
@@ -31,10 +22,7 @@ void output_chars(string s)
     output_chars(s[1..]);
 }
 
-void print_string(int n)
-{
-    output_chars(skip_n_strings(n, strings));
-}
+void print_string(int n) => output_chars(skip_n_strings(n, strings));
 
 void inner_loop(int count_day, int current_day)
 {
