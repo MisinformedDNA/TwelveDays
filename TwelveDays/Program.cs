@@ -15,9 +15,9 @@ string skip_n_strings(int n, string s)
         return s;
 
     if (s[0] == '/')
-        return skip_n_strings(n + 1, s.Substring(1));
+        return skip_n_strings(n + 1, s[1..]);
     else
-        return skip_n_strings(n, s.Substring(1));
+        return skip_n_strings(n, s[1..]);
 }
 
 ///* find the character in the translation buffer matching c and output
@@ -28,7 +28,7 @@ void translate_and_put_char(char c, string trans)
     if (c == trans[0])
         Console.Write(trans[31]);
     else
-        translate_and_put_char(c, trans.Substring(1));
+        translate_and_put_char(c, trans[1..]);
 }
 
 void output_chars(string s)
@@ -36,7 +36,7 @@ void output_chars(string s)
     if (s[0] == '/')
         return;
     translate_and_put_char(s[0], translate);
-    output_chars(s.Substring(1));
+    output_chars(s[1..]);
 }
 
 ///* skip to the "n^th" string and print it */
