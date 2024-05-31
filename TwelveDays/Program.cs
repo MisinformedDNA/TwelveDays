@@ -4,9 +4,6 @@ string strings = "@n'+,#'/*{}w+/w#cdnr/+,{}r/*de}+,/*{*+,/w{%+,/w#q#n+,/#{l+,/n{
 
 string translate = "!ek;dc i@bK'(q)-[w]*%n+r3#l,{}:\nuwloca-O;m .vpbks,fxntdCeghiry";
 
-int FIRST_DAY = 1;
-int LAST_DAY = 12;
-
 ///* skip -n strings (separator is /), where n is a negative value */
 
 string skip_n_strings(int n, string s)
@@ -48,39 +45,24 @@ void print_string(int n)
 
 void inner_loop(int count_day, int current_day)
 {
-    if (count_day == FIRST_DAY)
+    if (count_day == 1)
     {
-        print_string((int)StringIndex.ON_THE);               /* "On the " */
+        print_string(0);               /* "On the " */
         print_string(-current_day);         /* twelve days, ranges from -1 to -12 */
-        print_string((int)StringIndex.DAY_OF_CHRISTMAS);     /* "day of Christmas ..." */
+        print_string(-13);     /* "day of Christmas ..." */
     }
 
     if (count_day < current_day)     /* inner iteration */
         inner_loop(count_day + 1, current_day);
 
-    print_string((int)StringIndex.PARTRIDGE_IN_A_PEAR_TREE + (count_day - 1));   /* print the gift */
+    print_string(-25 + (count_day - 1));   /* print the gift */
 }
 
 void outer_loop(int count_day, int current_day)
 {
     inner_loop(count_day, current_day);
-    if (count_day == FIRST_DAY && current_day < LAST_DAY)  /* outer iteration */
+    if (count_day == 1 && current_day < 12)  /* outer iteration */
         outer_loop(1, current_day + 1);
 }
 
 outer_loop(1, 1);
-
-
-///* the original "indices" of the various strings */
-
-enum StringIndex
-{
-    ON_THE = 0,
-    FIRST = -1,
-    TWELFTH = -12,
-    DAY_OF_CHRISTMAS = -13,
-    TWELVE_DRUMMERS_DRUMMING = -14,
-    ELEVEN_PIPERS_PIPING = -15,
-    TWO_TURTLE_DOVES_AND_A = -24,
-    PARTRIDGE_IN_A_PEAR_TREE = -25
-};
