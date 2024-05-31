@@ -8,42 +8,24 @@ string skip_n_strings(int n, string s) => n == 0 ? s : s[0] == '/' ? skip_n_stri
 
 void translate_and_put_char(char c, string trans)
 {
-    if (c == trans[0])
-        Write(trans[31]);
-    else
-        translate_and_put_char(c, trans[1..]);
+    if (c == trans[0]) Write(trans[31]); else translate_and_put_char(c, trans[1..]);
 }
 
 void output_chars(string s)
 {
-    if (s[0] == '/')
-        return;
-    translate_and_put_char(s[0], translate);
-    output_chars(s[1..]);
+    if (s[0] == '/') return; translate_and_put_char(s[0], translate); output_chars(s[1..]);
 }
 
 void print_string(int n) => output_chars(skip_n_strings(n, strings));
 
 void inner_loop(int count_day, int current_day)
 {
-    if (count_day == 1)
-    {
-        print_string(0);
-        print_string(-current_day);
-        print_string(-13);
-    }
-
-    if (count_day < current_day)
-        inner_loop(count_day + 1, current_day);
-
-    print_string(-26 + count_day);
+    if (count_day == 1) { print_string(0); print_string(-current_day); print_string(-13); } if (count_day < current_day) inner_loop(count_day + 1, current_day); print_string(-26 + count_day);
 }
 
 void outer_loop(int count_day, int current_day)
 {
-    inner_loop(count_day, current_day);
-    if (count_day == 1 && current_day < 12)
-        outer_loop(1, current_day + 1);
+    inner_loop(count_day, current_day); if (count_day == 1 && current_day < 12) outer_loop(1, current_day + 1);
 }
 
 outer_loop(1, 1);
